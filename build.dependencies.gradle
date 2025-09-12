@@ -28,6 +28,7 @@ dependencies {
     implementation 'dev.nextftc:control:1.0.0'
     implementation 'dev.nextftc:bindings:1.0.0'
     implementation 'dev.nextftc.extensions:pedro:1.0.0'
+
     implementation 'com.acmerobotics.dashboard:dashboard:0.4.17'
 }
 
