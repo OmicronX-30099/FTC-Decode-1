@@ -5,6 +5,8 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin;
 
+import java.util.Map;
+
 import dev.nextftc.core.subsystems.Subsystem;
 import dev.nextftc.ftc.ActiveOpMode;
 
@@ -14,7 +16,11 @@ public class LimelightSubsystem implements Subsystem {
 
     public Limelight3A limelight;
 
-
+    public Map<Integer, String> motif = Map.of(
+            21, "GPP",
+            22, "PGP",
+            23, "PPG"
+    );
 
     @Override
     public void initialize() {
@@ -23,7 +29,7 @@ public class LimelightSubsystem implements Subsystem {
         limelight.start();
 
 
-        ActiveOpMode.telemetry().addData("Status", "Limelight Initialized");
+        ActiveOpMode.telemetry().addData("Limelight", "Status: Limelight Initialized");
         ActiveOpMode.telemetry().update();
     }
 
@@ -33,19 +39,13 @@ public class LimelightSubsystem implements Subsystem {
             if (result != null && result.isValid()) {
                 // Get AprilTag data from the result
                 int tagId = result.getFiducialResults().get(0).getFiducialId();
-
-                double tx = result.getTx();
-                double ty = result.getTy();
-
-
+                String sequence = motif.get(tagId);
                 // Display data to the Driver Station
-                ActiveOpMode.telemetry().addData("Tag ID", tagId);
-                ActiveOpMode.telemetry().addData("Target X (degrees)", tx);
-                ActiveOpMode.telemetry().addData("Target Y (degrees)", ty);
-
+                ActiveOpMode.telemetry().addData("Limelight", "TagId"+tagId);
+                ActiveOpMode.telemetry().addData("Limelight", "Sequence: "+sequence);
 
             } else {
-                ActiveOpMode.telemetry().addData("Status", "No AprilTag visible");
+                ActiveOpMode.telemetry().addData("Limelight", "Status: No AprilTag visible");
             }
         ActiveOpMode.telemetry().update();
     }

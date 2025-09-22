@@ -15,4 +15,9 @@ public class LimelightTeleOp extends NextFTCOpMode {
                 BindingsComponent.INSTANCE
         );
     }
+
+    @Override
+    public void onUpdate() {
+        LimelightSubsystem.INSTANCE.getResult();
+    }
 }
