@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.Resources.Templates.kt
 
 import com.rowanmcalpin.nextftc.core.Subsystem
@@ -9,7 +10,7 @@ import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.RunToPosition
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower
 
-object MotorSubsystemTemplate: Subsystem() {
+object `MotorSubsystemTemplateKT`: Subsystem() {
     lateinit var sample_motor: MotorEx
 
     val sample_position = 0.0
@@ -31,3 +32,4 @@ object MotorSubsystemTemplate: Subsystem() {
         sample_motor = MotorEx("*name*")
     }
 }
+*/
