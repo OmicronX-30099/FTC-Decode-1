@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Resources.Templates.kt
+/*package org.firstinspires.ftc.teamcode.Resources.Templates.kt
 
 import com.rowanmcalpin.nextftc.core.Subsystem
 import com.rowanmcalpin.nextftc.core.command.Command
@@ -31,3 +31,4 @@ object MotorSubsystemTemplate: Subsystem() {
         sample_motor = MotorEx("*name*")
     }
 }
+*/
