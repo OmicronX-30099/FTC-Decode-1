@@ -1,8 +1,13 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
-import org.firstinspires.ftc.teamcode.Constants.ConfigConstants;
+import static org.firstinspires.ftc.teamcode.Constants.ConfigConstants.*;
 
+import org.firstinspires.ftc.teamcode.Constants.ConfigConstants;
+import org.firstinspires.ftc.teamcode.Systems.Subsystems.PartSubsystems.FlywheelSubsystem;
+
+import dev.nextftc.bindings.BindingManager;
 import dev.nextftc.core.commands.Command;
+import dev.nextftc.core.commands.conditionals.IfElseCommand;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.core.components.SubsystemComponent;
 import dev.nextftc.ftc.Gamepads;
@@ -14,15 +19,15 @@ import dev.nextftc.hardware.impl.MotorEx;
 public class InitialTeleOp extends NextFTCOpMode {
     public InitialTeleOp() {
         addComponents(
-                new SubsystemComponent(),
+                new SubsystemComponent(FlywheelSubsystem.INSTANCE),
                 BulkReadComponent.INSTANCE,
                 BindingsComponent.INSTANCE
         );
     }
-    private final MotorEx front_left_motor = new MotorEx(ConfigConstants.motor_fl_config);
-    private final MotorEx front_right_motor = new MotorEx(ConfigConstants.motor_fr_config);
-    private final MotorEx back_left_motor = new MotorEx(ConfigConstants.motor_bl_config);
-    private final MotorEx back_right_motor = new MotorEx(ConfigConstants.motor_br_config);
+    private final MotorEx front_left_motor = new MotorEx(motor_fl_config).brakeMode().reversed();
+    private final MotorEx front_right_motor = new MotorEx(motor_fr_config).brakeMode();
+    private final MotorEx back_left_motor = new MotorEx(motor_bl_config).brakeMode().reversed();
+    private final MotorEx back_right_motor = new MotorEx(motor_br_config).brakeMode();
 
     @Override
     public void onStartButtonPressed() {
@@ -36,5 +41,15 @@ public class InitialTeleOp extends NextFTCOpMode {
                 Gamepads.gamepad1().rightStickX()
         );
         drivetrain.schedule();
+    }
+
+    @Override
+    public void onUpdate() {
+        BindingManager.update();
+    }
+
+    @Override
+    public void onStop() {
+        BindingManager.reset();
     }
 }
