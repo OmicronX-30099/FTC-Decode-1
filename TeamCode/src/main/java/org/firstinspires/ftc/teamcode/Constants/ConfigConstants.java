@@ -13,4 +13,6 @@ public class ConfigConstants {
     public static String motor_turret_config = "motor_turret";
     public static String motor_intake_config = "motor_intake";
     public static String servo_hood_config = "servo_hood";
+    // uncomment below once setup on CAD
+    // public static String sensor_color_config = "sensor_color";
 }
