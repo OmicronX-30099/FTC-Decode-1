@@ -26,7 +26,3 @@ android {
 dependencies {
     implementation project(':FtcRobotController')
 }
-
-kotlin {
-    jvmToolchain(8)
-}
