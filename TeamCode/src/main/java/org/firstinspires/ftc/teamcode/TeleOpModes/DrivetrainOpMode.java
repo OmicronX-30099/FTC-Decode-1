@@ -20,10 +20,10 @@ public class DrivetrainOpMode extends NextFTCOpMode {
     }
 
     // change the names and directions to suit your robot
-    private final MotorEx frontLeftMotor = new MotorEx("front_left");
-    private final MotorEx frontRightMotor = new MotorEx("front_right").reversed();
-    private final MotorEx backLeftMotor = new MotorEx("back_left");
-    private final MotorEx backRightMotor = new MotorEx("back_right").reversed();
+    private final MotorEx frontLeftMotor = new MotorEx("fl");
+    private final MotorEx frontRightMotor = new MotorEx("fr").reversed();
+    private final MotorEx backLeftMotor = new MotorEx("bl");
+    private final MotorEx backRightMotor = new MotorEx("br").reversed();
 
     @Override
     public void onStartButtonPressed() {
