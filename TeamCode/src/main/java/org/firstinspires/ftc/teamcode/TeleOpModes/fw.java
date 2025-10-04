@@ -33,5 +33,6 @@ public class fw extends NextFTCOpMode {
     @Override
     public void onStartButtonPressed() {
         Command asdf = new SetPower(motor, power);
+        asdf.schedule();
     }
 }
