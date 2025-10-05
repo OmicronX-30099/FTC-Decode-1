@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Resources.Templates.jv;
+/*package org.firstinspires.ftc.teamcode.Resources.Templates.jv;
 
 import androidx.annotation.NonNull;
 
@@ -43,4 +43,4 @@ public class MotorSubsystemTemplate extends Subsystem {
         // insert config name for motor
         sample_motor = new MotorEx("*name*");
     }
-}
+}*/

@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.TeleOpModes;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import dev.nextftc.core.commands.Command;
-import dev.nextftc.core.commands.CommandManager;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
@@ -28,32 +27,23 @@ public class DrivetrainOpMode extends NextFTCOpMode {
     private final MotorEx backRightMotor = new MotorEx("br");
     private final MotorEx fwl = new MotorEx("fwl").reversed();
     private final MotorEx fwr = new MotorEx("fwr");
-    private final MotorGroup fwmotors = new MotorGroup(fwl,fwr);
+    private final MotorGroup fwmotor = new MotorGroup(fwl,fwr);
 
     @Override
     public void onStartButtonPressed() {
-        Command driverControlled = drivetrain(1).named("normalDrivetrain");
-        driverControlled.schedule();
-
-        Gamepads.gamepad1().rightTrigger().greaterThan(0.05)
-                .whenTrue(() -> fwmotors.setPower(Gamepads.gamepad1().rightTrigger().get()))
-                .whenBecomesFalse(() -> fwmotors.setPower(0));
-        Gamepads.gamepad1().leftBumper().whenBecomesTrue(
-                () -> drivetrain(0.5).named("slowDrivetrain").schedule()
-        );
-        Gamepads.gamepad1().rightBumper().whenBecomesTrue(
-                () -> drivetrain(1).named("normalDrivetrain").schedule()
-        );
-    }
-    public Command drivetrain(double scalar) {
-        return new MecanumDriverControlled(
+        Command driverControlled = new MecanumDriverControlled(
                 frontLeftMotor,
                 frontRightMotor,
                 backLeftMotor,
                 backRightMotor,
-                () -> -1 * scalar * Gamepads.gamepad1().leftStickY().get(),
-                () -> scalar * Gamepads.gamepad1().leftStickX().get(),
-                () -> scalar * Gamepads.gamepad1().rightStickX().get()
-        );
+                Gamepads.gamepad1().leftStickY().negate(),
+                //Gamepads.gamepad1().leftStickY(),
+                Gamepads.gamepad1().leftStickX(),
+                Gamepads.gamepad1().rightStickX()
+        ).named("Drivetrain");
+        driverControlled.schedule();
+        Gamepads.gamepad1().leftTrigger().greaterThan(0)
+                .whenTrue(() -> fwmotor.setPower(Gamepads.gamepad1().leftTrigger().get()))
+                .whenBecomesFalse(() -> fwmotor.setPower(0));
     }
 }
