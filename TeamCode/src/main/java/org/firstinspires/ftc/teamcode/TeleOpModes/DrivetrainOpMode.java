@@ -7,6 +7,7 @@ import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
+import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 
@@ -24,6 +25,9 @@ public class DrivetrainOpMode extends NextFTCOpMode {
     private final MotorEx frontRightMotor = new MotorEx("fr");
     private final MotorEx backLeftMotor = new MotorEx("bl").reversed();
     private final MotorEx backRightMotor = new MotorEx("br");
+    private final MotorEx fwl = new MotorEx("fwl").reversed();
+    private final MotorEx fwr = new MotorEx("fwr");
+    private final MotorGroup fwmotor = new MotorGroup(fwl,fwr);
 
     @Override
     public void onStartButtonPressed() {
@@ -38,5 +42,8 @@ public class DrivetrainOpMode extends NextFTCOpMode {
                 Gamepads.gamepad1().rightStickX()
         ).named("Drivetrain");
         driverControlled.schedule();
+        Gamepads.gamepad1().leftTrigger().greaterThan(0)
+                .whenTrue(() -> fwmotor.setPower(Gamepads.gamepad1().leftTrigger().get()))
+                .whenBecomesFalse(() -> fwmotor.setPower(0));
     }
 }
