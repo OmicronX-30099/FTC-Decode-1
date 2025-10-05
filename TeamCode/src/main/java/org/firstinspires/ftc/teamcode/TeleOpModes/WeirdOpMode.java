@@ -11,9 +11,9 @@ import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 
-@TeleOp(name = "Drivetrain OpMode",group="TestOpModes")
-public class DrivetrainOpMode extends NextFTCOpMode {
-    public DrivetrainOpMode() {
+@TeleOp(name = "Weirdo OpMode bum",group="TestOpModes")
+public class WeirdOpMode extends NextFTCOpMode {
+    public WeirdOpMode() {
         addComponents(
                 BulkReadComponent.INSTANCE,
                 BindingsComponent.INSTANCE
