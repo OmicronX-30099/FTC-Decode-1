@@ -51,9 +51,6 @@ public class WeirdOpMode extends NextFTCOpMode {
                         new InstantCommand(() -> driverControlled.setScalar(1))
                         )
         );
-        Gamepads.gamepad1().rightBumper().whenBecomesTrue(
-                () -> driverControlled.setScalar(1)
-        );
 
         Gamepads.gamepad1().rightTrigger().greaterThan(0.05)
                 .whenTrue(() -> fwmotors.setPower(Gamepads.gamepad1().rightTrigger().get()))
