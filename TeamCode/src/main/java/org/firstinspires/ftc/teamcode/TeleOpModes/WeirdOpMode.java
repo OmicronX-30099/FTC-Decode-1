@@ -30,6 +30,7 @@ public class WeirdOpMode extends NextFTCOpMode {
     private final MotorEx fwl = new MotorEx("fwl").reversed();
     private final MotorEx fwr = new MotorEx("fwr");
     private final MotorGroup fwmotors = new MotorGroup(fwl,fwr);
+    private final MotorEx turret = new MotorEx("tur");
 
     private MecanumDriverControlled driverControlled;
 
@@ -44,16 +45,39 @@ public class WeirdOpMode extends NextFTCOpMode {
                 Gamepads.gamepad1().rightStickX()
         );
         driverControlled.named("Drivetrain").schedule();
-                Gamepads.gamepad1().leftBumper().whenBecomesTrue(
-                    new IfElseCommand(
-                        () -> driverControlled.getScalar() == 1,
-                        new InstantCommand(() -> driverControlled.setScalar(0.5)),
-                        new InstantCommand(() -> driverControlled.setScalar(1))
+        Gamepads.gamepad1().dpadDown()
+                .whenBecomesTrue(
+                        new IfElseCommand(
+                                () -> driverControlled.getScalar() == 1,
+                                new InstantCommand(() -> driverControlled.setScalar(0.5)),
+                                new InstantCommand(() -> driverControlled.setScalar(1))
                         )
-        );
+                )
+        ;
 
         Gamepads.gamepad1().rightTrigger().greaterThan(0.05)
                 .whenTrue(() -> fwmotors.setPower(Gamepads.gamepad1().rightTrigger().get()))
-                .whenBecomesFalse(() -> fwmotors.setPower(0));
+                .whenBecomesFalse(() -> fwmotors.setPower(0))
+        ;
+        Gamepads.gamepad1().rightBumper()
+                .whenTrue(() -> turret.setPower(0.1))
+                .whenBecomesFalse(() -> turret.setPower(0))
+        ;
+        Gamepads.gamepad1().leftBumper()
+                .whenTrue(
+                        new IfElseCommand(
+                                () -> !Gamepads.gamepad1().leftBumper().get(),
+                                new InstantCommand(() -> turret.setPower(-0.1)),
+                                new InstantCommand(() -> {})
+                        )
+                )
+                .whenBecomesFalse(
+                        new IfElseCommand(
+                                () -> !Gamepads.gamepad1().rightBumper().get(),
+                                new InstantCommand(() -> turret.setPower(0)),
+                                new InstantCommand(() -> {})
+                        )
+                )
+        ;
     }
 }
