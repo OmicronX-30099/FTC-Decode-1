@@ -1,4 +1,4 @@
 package org.firstinspires.ftc.teamcode.Systems;
 
-public class FlywheelSubsystem {
+public class HoodSubsystem {
 }
