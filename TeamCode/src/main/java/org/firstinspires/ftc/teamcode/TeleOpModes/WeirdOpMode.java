@@ -14,7 +14,7 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 
 @TeleOp(name = "Weirdo OpMode",group="TestOpModes")
-public class WeirdOpMode extends NextFTCOpMode {
+public class    WeirdOpMode extends NextFTCOpMode {
     public WeirdOpMode() {
         addComponents(
                 BulkReadComponent.INSTANCE,
