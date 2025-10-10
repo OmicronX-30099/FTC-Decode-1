@@ -8,9 +8,8 @@ import static org.firstinspires.ftc.teamcode.Constants.PositionConstants.d;
 import static org.firstinspires.ftc.teamcode.Constants.ConfigConstants.motor_turret_config;
 
 import dev.nextftc.control.ControlSystem;
-import dev.nextftc.core.commands.Command;
+import dev.nextftc.control.KineticState;
 import dev.nextftc.core.subsystems.Subsystem;
-import dev.nextftc.hardware.controllable.RunToPosition;
 import dev.nextftc.hardware.impl.MotorEx;
 
 public class TurretSubsystem implements Subsystem {
@@ -22,6 +21,18 @@ public class TurretSubsystem implements Subsystem {
             .posPid(p,i,d)
             .build()
     ;
+
+    public double calculate(double x, double y, double heading) {
+        double dx = 144-x;
+        double dy = 48+y;
+        double angle = Math.asin(y/(Math.sqrt(dx*dx+dy*dy)));
+        double ticks = ((angle-heading)/(2*Math.PI)) * 384.5;
+        return ticks;
+    }
+
+    public void setGoal(double goal) {
+        turretControl.setGoal(new KineticState(goal));
+    }
 
     @Override
     public void periodic() {

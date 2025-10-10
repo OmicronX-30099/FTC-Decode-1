@@ -1,0 +1,32 @@
+package org.firstinspires.ftc.teamcode.TeleOpModes;
+
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.Constants.Constants;
+import org.firstinspires.ftc.teamcode.Systems.TurretSubsystem;
+
+import dev.nextftc.core.components.BindingsComponent;
+import dev.nextftc.core.components.SubsystemComponent;
+import dev.nextftc.extensions.pedro.PedroComponent;
+import dev.nextftc.ftc.NextFTCOpMode;
+import dev.nextftc.ftc.components.BulkReadComponent;
+import static dev.nextftc.extensions.pedro.PedroComponent.follower;
+
+@TeleOp(name = "Turret AutoAim Opmode")
+public class TAim extends NextFTCOpMode {
+    public TAim() {
+        addComponents(
+                new SubsystemComponent(TurretSubsystem.INSTANCE),
+                BulkReadComponent.INSTANCE,
+                BindingsComponent.INSTANCE,
+                new PedroComponent(Constants::createFollower)
+        );
+    }
+    public double turretgoal;
+
+    @Override
+    public void onUpdate() {
+        turretgoal = TurretSubsystem.INSTANCE.calculate(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
+        TurretSubsystem.INSTANCE.setGoal(turretgoal);
+    }
+}
