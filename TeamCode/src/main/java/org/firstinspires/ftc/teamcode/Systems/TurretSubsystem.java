@@ -22,6 +22,8 @@ public class TurretSubsystem implements Subsystem {
             .build()
     ;
 
+    public static double turret_goal;
+
     public double calculate(double x, double y, double heading) {
         double dx = 144-x;
         double dy = 48+y;
@@ -30,8 +32,9 @@ public class TurretSubsystem implements Subsystem {
         return ticks;
     }
 
-    public void setGoal(double goal) {
-        turretControl.setGoal(new KineticState(goal));
+    public void aimBot(double x, double y, double heading) {
+        turret_goal = this.calculate(x, y, heading);
+        turretControl.setGoal(new KineticState(turret_goal));
     }
 
     @Override

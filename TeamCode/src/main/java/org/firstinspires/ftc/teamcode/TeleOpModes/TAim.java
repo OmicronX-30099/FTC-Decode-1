@@ -22,11 +22,9 @@ public class TAim extends NextFTCOpMode {
                 new PedroComponent(Constants::createFollower)
         );
     }
-    public double turretgoal;
 
     @Override
     public void onUpdate() {
-        turretgoal = TurretSubsystem.INSTANCE.calculate(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
-        TurretSubsystem.INSTANCE.setGoal(turretgoal);
+        TurretSubsystem.INSTANCE.aimBot(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
     }
 }
