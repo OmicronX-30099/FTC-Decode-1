@@ -26,5 +26,9 @@ public class TAim extends NextFTCOpMode {
     @Override
     public void onUpdate() {
         TurretSubsystem.INSTANCE.aimBot(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading());
+        telemetry.addData("heading",follower().getHeading());
+        telemetry.addData("X",follower().getPose().getX());
+        telemetry.addData("Y",follower().getPose().getY());
+        telemetry.addData("ticks",TurretSubsystem.INSTANCE.calculate(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading()));
     }
 }
