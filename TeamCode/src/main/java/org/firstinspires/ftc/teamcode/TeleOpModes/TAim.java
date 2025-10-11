@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOpModes;
 
+import static org.firstinspires.ftc.teamcode.Systems.TurretSubsystem.*;
+
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Constants.Constants;
@@ -31,6 +33,7 @@ public class TAim extends NextFTCOpMode {
         ActiveOpMode.telemetry().addData("X",follower().getPose().getX());
         ActiveOpMode.telemetry().addData("Y",follower().getPose().getY());
         ActiveOpMode.telemetry().addData("ticks",TurretSubsystem.INSTANCE.calculate(follower().getPose().getX(), follower().getPose().getY(), follower().getHeading()));
+        ActiveOpMode.telemetry().addData("power",turretControl.calculate(turretMotor.getState()));
         ActiveOpMode.telemetry().update();
     }
 }
