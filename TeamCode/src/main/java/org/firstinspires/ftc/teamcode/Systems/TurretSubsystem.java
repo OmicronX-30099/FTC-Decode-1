@@ -27,7 +27,7 @@ public class TurretSubsystem implements Subsystem {
     public double calculate(double x, double y, double heading) {
         double dx = 144-x;
         double dy = 48+y;
-        double angle = Math.asin(y/(Math.sqrt(dx*dx+dy*dy)));
+        double angle = Math.asin(dy/(Math.sqrt(dx*dx+dy*dy)));
         double ticks = ((angle-heading)/(2*Math.PI)) * 384.5;
         return ticks;
     }
