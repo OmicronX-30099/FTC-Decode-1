@@ -18,7 +18,7 @@ public class TurretSubsystem implements Subsystem {
 
     private MotorEx turretMotor = new MotorEx("tur");
     public static ControlSystem turretControl = ControlSystem.builder()
-            .posPid(p,i,d)
+            .posPid(0.1,0,0)
             .build()
     ;
 
